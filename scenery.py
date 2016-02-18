@@ -20,6 +20,7 @@ class Scenery(pygame.sprite.Sprite):
 	def update(self, x, y):
 		self.x = x
 		self.y = y
+		self.__print_sky()
 		if self.y <  64:
 			self.__print_grass()
 
@@ -30,3 +31,6 @@ class Scenery(pygame.sprite.Sprite):
 			gras[1].centerx = x
 			self.screen.blit(gras[0], gras[1])
 			x = x + 64
+
+	def __print_sky(self):
+		self.screen.fill((0, 0, 255))
