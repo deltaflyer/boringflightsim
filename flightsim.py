@@ -2,15 +2,19 @@ import singleton
 import pygame
 import sys
 from plane import Plane
+from scenery import Scenery
 
 screen = ''
 clock = pygame.time.Clock()
 fps = 30
-plane = Plane([500, 230])
+plane = ''
+scenery = ''
 
 def main():
-	global screen
+	global screen, plane, scenery
 	screen = init_display()
+	plane = Plane(200,300)
+	scenery = Scenery(screen, 0, 0)
 	run_game()
 
 def init_display():
@@ -30,6 +34,7 @@ def run_game():
 
 		# Draw the ship
 		screen.fill([0, 0, 0])
+		scenery.update(0,0)
 		plane.update()
 		screen.blit(plane.image, plane.rect)
 		pygame.display.flip()

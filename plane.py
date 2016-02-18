@@ -2,13 +2,13 @@
 import pygame
 import os
 class Plane(pygame.sprite.Sprite):
-  def __init__(self, position):
+  def __init__(self, x, y):
 
       pygame.sprite.Sprite.__init__(self)
-      self.imageMaster = pygame.image.load(os.path.join('graphics', 'plane.png'))
+      self.imageMaster = pygame.image.load(os.path.join('graphics', 'plane_small.png'))
       self.image = self.imageMaster
       self.rect = self.image.get_rect()
-      self.position = position
+      self.position = [x, y]
       self.rect.centerx, self.rect.centery = self.position
       self.angle = 0
 
