@@ -15,6 +15,7 @@ class Plane(pygame.sprite.Sprite):
     self.angle_old = 0
 
     self.knots = 0
+    self.feet = 0
 
   def increase_speed(self):
     if self.knots < 485: # 485 Knots = 900 km/h
@@ -26,6 +27,17 @@ class Plane(pygame.sprite.Sprite):
 
   def get_speed(self):
     return self.knots
+
+  def pull_up(self):
+    if self.feet > 0:
+      self.feet = self.feet - 10
+
+  def push_down(self):
+    if self.feet < 45000:
+      self.feet = self.feet + 10
+
+  def get_feet(self):
+    return self.feet
 
   def update(self):
     # Only rotate if necessary
