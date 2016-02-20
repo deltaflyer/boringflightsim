@@ -18,7 +18,7 @@ heightindicator = ''
 def main():
 	global screen, plane, scenery, speedindicator, heightindicator
 	screen = init_display()
-	plane = Plane(screen, 200,300)
+	plane = Plane(screen)
 	scenery = Scenery(screen, 0, 0)
 	speedindicator = Speedindicator(screen)
 	heightindicator = Heightindicator(screen)
