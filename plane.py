@@ -1,4 +1,3 @@
-# sprite for the shipclass 
 import pygame
 import os
 class Plane(pygame.sprite.Sprite):
@@ -13,14 +12,25 @@ class Plane(pygame.sprite.Sprite):
     self.x = x
     self.y = y
     self.angle = 0
+    self.angle_old = 0
 
-  def update(self, x, y, angle):
+    self.knots = 0
+
+  def increase_speed(self):
+    if self.knots < 485: # 485 Knots = 900 km/h
+      self.knots = self.knots + 10
+
+  def decrease_speed(self):
+    if self.knots > 0:
+      self.knots = self.knots - 10
+
+  def get_speed(self):
+    return self.knots
+
+  def update(self):
     # Only rotate if necessary
-    if self.angle != angle:
-        self.plane_img = pygame.transform.rotate(self.plane_img, angle)
-    self.x = x
-    self.y = y
-    self.angle = angle
+    if self.angle != self.angle_old:
+      self.plane_img = pygame.transform.rotate(self.plane_img, self.angle)
     self.plane_rect.centerx = self.x
     self.plane_rect.centery = self.y
     self.screen.blit(self.plane_img, self.plane_rect)
