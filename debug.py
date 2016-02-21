@@ -23,5 +23,5 @@ class Debug(pygame.sprite.Sprite):
     output.append("Set Thrust: " + str(self.plane.set_thrust))
     for line in output:
         speed_display = self.font_object.render(line, 1,(255,255,255))
-        self.screen.blit(speed_display, (1150, 20 + y_offset))
+        self.screen.blit(speed_display, (20, 20 + y_offset))
         y_offset += 14
