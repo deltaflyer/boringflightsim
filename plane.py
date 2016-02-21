@@ -14,6 +14,7 @@ class Plane(pygame.sprite.Sprite):
     self.screen = screen
     self.angle = 0
     self.angle_old = 0
+    self.set_angle = 0
 
     self.knots = 0
     self.feet = 0
@@ -43,26 +44,30 @@ class Plane(pygame.sprite.Sprite):
     return self.knots
 
   def push_down(self):
-    if self.feet > 0:
-      self.feet = self.feet - 10
+    if self.set_angle > -90:
+      self.set_angle= self.set_angle - 5
 
   def pull_up(self):
-    if self.feet < 45000:
-      self.angle_old = self.angle
-      self.feet = self.feet + 10
-      if self.angle < 160:
-        self.angle = self.angle + 20
+    if self.set_angle < 90:
+      self.set_angle= self.set_angle + 5
 
   def get_feet(self):
     return self.feet
 
   def update(self):
-    if self.angle > 0:
+    if self.angle is not self.set_angle:
       self.angle_old = self.angle
-      self.angle = self.angle -1
+      if self.angle < self.set_angle:
+        self.angle = self.angle + 0.5
+      if self.angle > self.set_angle:
+        self.angle = self.angle - 0.5
+
     if self.angle is not self.angle_old:
-      self.plane_img = self.images_computes[self.angle][0]
-      self.plane_rect = self.images_computes[self.angle][1]
+      int_angle = int(self.angle + 0.5)
+      self.plane_img = self.images_computes[int_angle][0]
+      self.plane_rect = self.images_computes[int_angle][1]
+
+
 
     self.screen.blit(self.plane_img, self.plane_rect)
     print self.angle
