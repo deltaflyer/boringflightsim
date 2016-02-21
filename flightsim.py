@@ -6,6 +6,7 @@ from plane import Plane
 from scenery import Scenery
 from speedindicator import Speedindicator
 from heightindicator import Heightindicator
+from thrustindicator import Thrustindicator
 
 screen = ''
 clock = pygame.time.Clock()
@@ -14,14 +15,16 @@ plane = ''
 scenery = ''
 speedindicator = ''
 heightindicator = ''
+thrustindicator = ''
 
 def main():
-	global screen, plane, scenery, speedindicator, heightindicator
+	global screen, plane, scenery, speedindicator, heightindicator, thrustindicator
 	screen = init_display()
 	plane = Plane(screen)
 	scenery = Scenery(screen, 0, 0)
 	speedindicator = Speedindicator(screen)
 	heightindicator = Heightindicator(screen)
+	thrustindicator = Thrustindicator(screen)
 	run_game()
 
 def init_display():
@@ -36,7 +39,7 @@ def init_display():
 	return screen
 
 def run_game():
-	global screen, plane, clock, fps, speedindicator, heightindicator
+	global screen, plane, clock, fps, speedindicator, heightindicator, thrustindicator
 	while True:
 		clock.tick(30)
 		fps = clock.get_fps()
@@ -52,6 +55,9 @@ def run_game():
 
 		# Draw the height indicator
 		heightindicator.update(plane.get_feet())
+
+		# Draw the thrust indicator
+		thrustindicator.update(plane.get_thrust())
 
 		# Draw the plane
 		plane.update()
