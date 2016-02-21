@@ -62,13 +62,7 @@ class Plane(pygame.sprite.Sprite):
     # Bring real angle to set_angle
     self.__update_angles()
 
-    # Bring real knots to set_knots
-    if self.knots is not self.set_knots:
-      self.knots_old = self.knots
-      if self.knots < self.set_knots:
-        self.knots = self.knots + 1
-      if self.knots > self.set_knots:
-        self.knots = self.knots - 1
+    self.__update_knots()
 
     # Incrementally rotate the plane sprite
     if int(self.angle) is not int(self.angle_old):
@@ -119,6 +113,11 @@ class Plane(pygame.sprite.Sprite):
       return value * -1
     return value
 
-  def __rotate_center(self, angle):
-    self.plane_img = pygame.transform.rotate(self.plane_img, angle)
-    self.plane_rect = self.plane_img.get_rect(center = self.plane_rect.center)
+  def __update_knots(self):
+    # Bring real knots to set_knots
+    if self.knots is not self.set_knots:
+      self.knots_old = self.knots
+      if self.knots < self.set_knots:
+        self.knots = self.knots + 1
+      if self.knots > self.set_knots:
+        self.knots = self.knots - 1
