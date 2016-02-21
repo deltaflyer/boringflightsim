@@ -86,13 +86,6 @@ class Plane(pygame.sprite.Sprite):
       self.feet = self.feet + self.__calculate_climbrate(self.angle, self.knots)
 
     self.screen.blit(self.plane_img, self.plane_rect)
-    print "self.feet", self.feet
-    print "sefl.feet_old", self.feet_old
-    print "self.angle", self.angle
-    print "self.set_angle", self.set_angle
-    print "self.set_thrust", self.set_thrust
-    print "self.thrust", self.thrust
-    print "==================="
 
   def __update_thrust(self):
     # Incrementally change the thrust
@@ -137,9 +130,28 @@ class Plane(pygame.sprite.Sprite):
 
   def __update_knots(self):
     # Bring real knots to set_knots
-    if self.knots is not self.set_knots:
+    if self.knots == self.set_knots:
+      return
+    else:
       self.knots_old = self.knots
-      if self.knots < self.set_knots:
-        self.knots = self.knots + 1
-      if self.knots > self.set_knots:
-        self.knots = self.knots - 1
+      self.knots = self.knots + self.__calculate_acceleration(self.angle, self.thrust);
+
+  def __calculate_acceleration(self, angle, thrust):
+    # in case of climb decrease acceleration based on angle
+    if int(angle) > 0:
+      return (angle * - 1) + thrust
+
+    # in case of decent increas acceleration based on angle
+    if int(angle) < 0:
+      return angle + thrust
+
+    # in horizontal 
+    if int(angle) == 0:
+      if thrust < 10:
+        return - 2
+      if thrust > 10:
+        return 0
+      if thrust < 30:
+        return thrust * -1
+    if int(angle) < 0:
+      return angle + thrust
