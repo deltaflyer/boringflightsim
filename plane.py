@@ -16,6 +16,11 @@ class Plane(pygame.sprite.Sprite):
     self.angle_old = 0
     self.set_angle = 0
 
+    self.thrust = 0
+    self.thrust_old = 0
+    self.set_thrust = 0
+
+    # 485 Knots = 900 km/h
     self.knots = 0
     self.knots_old = 0
     self.set_knots = 0
@@ -37,12 +42,12 @@ class Plane(pygame.sprite.Sprite):
     return (rot_image, rot_rect)
 
   def increase_speed(self):
-    if self.set_knots < 485: # 485 Knots = 900 km/h
-      self.set_knots = self.set_knots + 10
+    if self.set_thrust < 100:
+      self.set_thrust = self.set_thrust + 10
 
   def decrease_speed(self):
-    if self.set_knots > 0:
-      self.set_knots = self.set_knots - 10
+    if self.set_thurst > 0:
+      self.set_thrust = self.set_thurst - 10
 
   def get_speed(self):
     return self.knots
@@ -58,9 +63,14 @@ class Plane(pygame.sprite.Sprite):
   def get_feet(self):
     return self.feet
 
+  def get_thrust(self):
+    return self.thrust
+
   def update(self):
     # Bring real angle to set_angle
     self.__update_angles()
+
+    self.__update_thrust()
 
     self.__update_knots()
 
@@ -79,8 +89,18 @@ class Plane(pygame.sprite.Sprite):
     print "self.feet", self.feet
     print "sefl.feet_old", self.feet_old
     print "self.angle", self.angle
-    print "sefl.set_angle", self.set_angle
+    print "self.set_angle", self.set_angle
+    print "self.thrust", self.thrust
     print "==================="
+
+  def __update_thurst(self):
+    # Incrementally change the thrust
+    if self.thrust is not self.thrust_old:
+      self.thrust_old = self.thrust
+      if self.thrust < self.set_thrust:
+        self.thrust = self.thrust + 1
+      if self.thrust > self.set_thrust:
+        self.thrust = self.thrust - 1
 
   def __update_angles(self):
     if int(self.angle) is not int(self.set_angle):
