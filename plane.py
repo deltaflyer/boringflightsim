@@ -3,12 +3,16 @@ import os
 class Plane(pygame.sprite.Sprite):
 
   def __init__(self, screen):
+
+    # static
+    self.TAKEOFFSPEED = 100
+
     pygame.sprite.Sprite.__init__(self)
 
     self.plane_img = pygame.image.load(os.path.join('graphics', 'plane_small.png'))
     self.plane_rect = self.plane_img.get_rect()
-    self.plane_rect.centerx = 200
-    self.plane_rect.centery = 300
+    self.plane_rect.centerx = 400
+    self.plane_rect.centery = 660
 
     self.screen = screen
 
@@ -51,11 +55,11 @@ class Plane(pygame.sprite.Sprite):
     return self.knots
 
   def push_down(self):
-    if self.set_angle > -90:
+    if self.set_angle > -90 and self.feet > 0:
       self.set_angle= self.set_angle - 5
 
   def pull_up(self):
-    if self.set_angle < 90:
+    if self.set_angle < 90 and self.knots > self.TAKEOFFSPEED:
       self.set_angle= self.set_angle + 5
 
   def get_feet(self):
