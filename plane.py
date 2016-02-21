@@ -10,14 +10,18 @@ class Plane(pygame.sprite.Sprite):
     self.plane_rect.centerx = 200
     self.plane_rect.centery = 300
 
-
     self.screen = screen
+
     self.angle = 0
     self.angle_old = 0
     self.set_angle = 0
 
     self.knots = 0
+    self.knots_old = 0
+    self.set_knots = 0
+
     self.feet = 0
+    self.feet_old = 0
 
     self.images_computes = self.__precompute_rotated_plane(self.plane_img, self.plane_rect)
 
@@ -33,12 +37,12 @@ class Plane(pygame.sprite.Sprite):
     return (rot_image, rot_rect)
 
   def increase_speed(self):
-    if self.knots < 485: # 485 Knots = 900 km/h
-      self.knots = self.knots + 10
+    if self.set_knots < 485: # 485 Knots = 900 km/h
+      self.set_knots = self.set_knots + 10
 
   def decrease_speed(self):
-    if self.knots > 0:
-      self.knots = self.knots - 10
+    if self.set_knots > 0:
+      self.set_knots = self.set_knots - 10
 
   def get_speed(self):
     return self.knots
@@ -55,22 +59,65 @@ class Plane(pygame.sprite.Sprite):
     return self.feet
 
   def update(self):
-    if self.angle is not self.set_angle:
-      self.angle_old = self.angle
-      if self.angle < self.set_angle:
-        self.angle = self.angle + 0.5
-      if self.angle > self.set_angle:
-        self.angle = self.angle - 0.5
+    # Bring real angle to set_angle
+    self.__update_angles()
 
-    if self.angle is not self.angle_old:
+    # Bring real knots to set_knots
+    if self.knots is not self.set_knots:
+      self.knots_old = self.knots
+      if self.knots < self.set_knots:
+        self.knots = self.knots + 1
+      if self.knots > self.set_knots:
+        self.knots = self.knots - 1
+
+    # Incrementally rotate the plane sprite
+    if int(self.angle) is not int(self.angle_old):
       int_angle = int(self.angle + 0.5)
       self.plane_img = self.images_computes[int_angle][0]
       self.plane_rect = self.images_computes[int_angle][1]
 
-
+    # Incrementally change the height
+    if self.feet is not self.feet_old:
+      self.feet_old = self.feet
+      self.feet = self.feet + self.__calculate_climbrate(self.angle, self.knots)
 
     self.screen.blit(self.plane_img, self.plane_rect)
-    print self.angle
+    print "self.feet", self.feet
+    print "sefl.feet_old", self.feet_old
+    print "self.angle", self.angle
+    print "sefl.set_angle", self.set_angle
+    print "==================="
+
+  def __update_angles(self):
+    if int(self.angle) is not int(self.set_angle):
+      self.angle_old = self.angle
+      # Climb and reduce speed
+      if self.angle < self.set_angle:
+        self.angle = self.angle + 0.5
+        self.knots = self.knots - 0.5
+        if self.knots > 100:
+          self.feet = self.feet + 0.5
+
+      # Sink and increse speed
+      if self.angle > self.set_angle:
+        self.angle = self.angle - 0.5
+        self.knots = self.knots + 0.5
+        if self.knots > 100:
+          self.feet = self.feet - 0.5
+
+  def __calculate_climbrate(self, angle, speed):
+    if int(self.angle) is 0 and int(self.set_angle) is 0:
+      return 0
+    value = 3 # default
+    if speed < 100:
+      return 0
+    if speed < 200:
+      value = 1
+    if speed < 400:
+      value = 2
+    if angle < 0:
+      return value * -1
+    return value
 
   def __rotate_center(self, angle):
     self.plane_img = pygame.transform.rotate(self.plane_img, angle)
