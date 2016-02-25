@@ -2,7 +2,7 @@ import pygame
 import os
 class Plane(pygame.sprite.Sprite):
 
-  def __init__(self, screen):
+  def __init__(self, screen, scenery):
 
     # static
     self.TAKEOFFSPEED = 100
@@ -15,6 +15,7 @@ class Plane(pygame.sprite.Sprite):
     self.plane_rect.centery = 660
 
     self.screen = screen
+    self.scenery = scenery
 
     self.angle = 0
     self.angle_old = 0
@@ -78,9 +79,9 @@ class Plane(pygame.sprite.Sprite):
 
     # Incrementally rotate the plane sprite
     if int(self.angle) is not int(self.angle_old):
-      int_angle = int(self.angle + 0.5)
-      self.plane_img = self.images_computes[int_angle][0]
-      self.plane_rect = self.images_computes[int_angle][1]
+      result = self.__compute_single_plane(self.feet, self.angle)
+      self.plane_img = result[0]
+      self.plane_rect = result[1]
 
     # Incrementally change the height
     if self.feet is not self.feet_old:
@@ -129,6 +130,21 @@ class Plane(pygame.sprite.Sprite):
     if angle < 0:
       return value * -1
     return value
+
+  def __compute_single_plane(self, feet, angle):
+    smoothed_angle = int(angle + 0.5)
+    plane_img = self.images_computes[smoothed_angle][0]
+    plane_rect = self.images_computes[smoothed_angle][1]
+    x_delta = int( (feet / 5) + 0.5 )
+    plane_rect.centery = 800 - x_delta
+
+    # Limit sliding space of the plane to the upper and lower barrier
+    if plane_rect.centery > 660:
+      plane_rect.centery = 660
+    if plane_rect.centery < 280:
+      plane_rect.centery = 280
+
+    return (plane_img, plane_rect) 
 
   def __update_knots(self):
     # Bring real knots to set_knots

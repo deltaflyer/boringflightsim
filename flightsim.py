@@ -22,8 +22,8 @@ debug = ''
 def main():
 	global screen, plane, scenery, speedindicator, heightindicator, thrustindicator, debug
 	screen = init_display()
-	plane = Plane(screen)
 	scenery = Scenery(screen, 0, 0)
+	plane = Plane(screen, scenery)
 	speedindicator = Speedindicator(screen)
 	heightindicator = Heightindicator(screen)
 	thrustindicator = Thrustindicator(screen)
