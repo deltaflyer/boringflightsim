@@ -21,7 +21,7 @@ class Plane(pygame.sprite.Sprite):
     self.angle_old = 0
     self.set_angle = 0
 
-    self.thrust = 0
+    self.thrust = 1
     self.thrust_old = 0
     self.set_thrust = 0
 
@@ -151,24 +151,21 @@ class Plane(pygame.sprite.Sprite):
     self.knots = self.knots + self.__calculate_acceleration(self.angle, self.thrust);
 
   def __calculate_acceleration(self, angle, thrust):
+    thrust_coeff = 0.002
+    air_drag = 0.05
+    temp_val = 0
+
     # in case of climb decrease acceleration based on angle
-    if int(angle) > 0:
-      return (angle * - 1) + thrust
+    if int(angle + 0.5) > 0:
+      return (thrust * thrust_coeff) - (angle * ( thrust_coeff * 6) )
 
     # in case of decent increas acceleration based on angle
-    if int(angle) < 0:
-      return angle + thrust
+    if int(angle + 0.5) < 0:
+      return (thrust * thrust_coeff) - (angle * ( thrust_coeff * 6) )
 
     # in horizontal and moving
-    if int(angle) == 0 and self.knots > 0:
-      if thrust < 10:
-        return -3
-      else:
-        return int((thrust / 2) + 0.5)
-
-    # in horizontal and standing
-
-    if angle == 0 and self.knots <= 0:
-      return thrust * 2
-
-    return 0
+    if int(angle + 0.5) == 0:
+      temp_val = (thrust * thrust_coeff)
+      if self.knots > 0:
+        temp_val = temp_val - air_drag
+      return temp_val

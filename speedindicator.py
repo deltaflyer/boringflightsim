@@ -12,5 +12,6 @@ class Speedindicator(pygame.sprite.Sprite):
     self.font_object = pygame.font.Font(font_path, font_size)
 
   def update(self, current_speed):
-    speed_display = self.font_object.render("Speed: " + str(current_speed), 1,(255,255,255))
+    speed = int(current_speed + 0.5)
+    speed_display = self.font_object.render("Speed: " + str(speed), 1,(255,255,255))
     self.screen.blit(speed_display, (1020, 10))
