@@ -25,15 +25,15 @@ class Scenery(pygame.sprite.Sprite):
 			return
 
 		x = 0
-		correction = 0
+		correction_y = 0
 		gras = self.__get_gras()
 
-		# Calculate the correction factor
+		# Calculate the correction factor for y based on plane height
 		if (self.plane.get_y_coords()) < 450:
-			correction = self.plane.get_y_coords() - 450
+			correction_y = self.plane.get_y_coords() - 450
 
 		# Print gras
-		gras[1].centery = 730 - correction
+		gras[1].centery = 730 - correction_y
 		for i in range(1, 25):
 			gras[1].centerx = x
 			self.screen.blit(gras[0], gras[1])
@@ -45,4 +45,4 @@ class Scenery(pygame.sprite.Sprite):
 		return (gras_img, gras_rect)
 
 	def __print_sky(self):
-		self.screen.fill((0, 0, 255))
+		self.screen.fill((182, 211, 225))
