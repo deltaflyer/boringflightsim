@@ -32,8 +32,7 @@ def main():
 
 def init_display():
 	pygame.init()
-	display_info = pygame.display.Info()
-	screen = pygame.display.set_mode((display_info.current_w, display_info.current_h))
+	screen = pygame.display.set_mode((1280, 745))
 	screen.fill([0, 0, 0])
 	icon = pygame.image.load(os.path.join('graphics', 'icon.png'))
 	icon = pygame.transform.scale(icon, (32, 32))
@@ -90,6 +89,12 @@ def handle_events(events):
 			if event.key == pygame.K_DOWN:
 				# pull up
 				plane.push_down()
+
+			# Debug code
+			if event.key == pygame.K_t:
+				# pull up
+				plane.set_speed(200)
+
 
 
 if __name__ == "__main__":

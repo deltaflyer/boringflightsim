@@ -29,7 +29,6 @@ class Plane(pygame.sprite.Sprite):
     self.knots = 0
 
     self.feet = 0
-    self.feet_old = 0
 
     self.images_computes = self.__precompute_rotated_plane(self.plane_img, self.plane_rect)
 
@@ -55,6 +54,9 @@ class Plane(pygame.sprite.Sprite):
   def get_speed(self):
     return self.knots
 
+  def set_speed(self, knots):
+    self.knots = knots
+
   def push_down(self):
     if self.set_angle > -90 and self.feet > 0:
       self.set_angle= self.set_angle - 5
@@ -73,20 +75,23 @@ class Plane(pygame.sprite.Sprite):
     # Bring real angle to set_angle
     self.__update_angles()
 
+    # Bring real thrust to set thrust
     self.__update_thrust()
 
+    # Compute the speed
     self.__update_knots()
+
+    # Compute the height
+    if self.feet >= 0:
+      self.feet = self.feet + self.__calculate_climbrate(self.angle, self.knots)
+    if self.feet < 0:
+      self.feet = 0
 
     # Incrementally rotate the plane sprite
     if int(self.angle) is not int(self.angle_old):
       result = self.__compute_single_plane(self.feet, self.angle)
       self.plane_img = result[0]
       self.plane_rect = result[1]
-
-    # Incrementally change the height
-    if self.feet is not self.feet_old:
-      self.feet_old = self.feet
-      self.feet = self.feet + self.__calculate_climbrate(self.angle, self.knots)
 
     self.screen.blit(self.plane_img, self.plane_rect)
 
@@ -101,21 +106,15 @@ class Plane(pygame.sprite.Sprite):
       self.thrust = self.thrust - 1
 
   def __update_angles(self):
+
     if int(self.angle) is not int(self.set_angle):
       self.angle_old = self.angle
-      # Climb and reduce speed
+      # Pull nose up
       if self.angle < self.set_angle:
         self.angle = self.angle + 0.5
-        self.knots = self.knots - 0.5
-        if self.knots > 100:
-          self.feet = self.feet + 0.5
-
-      # Sink and increse speed
+      # Push nose down
       if self.angle > self.set_angle:
         self.angle = self.angle - 0.5
-        self.knots = self.knots + 0.5
-        if self.knots > 100:
-          self.feet = self.feet - 0.5
 
   def __calculate_climbrate(self, angle, speed):
     if int(self.angle) is 0 and int(self.set_angle) is 0:
@@ -135,8 +134,8 @@ class Plane(pygame.sprite.Sprite):
     smoothed_angle = int(angle + 0.5)
     plane_img = self.images_computes[smoothed_angle][0]
     plane_rect = self.images_computes[smoothed_angle][1]
-    x_delta = int( (feet / 5) + 0.5 )
-    plane_rect.centery = 800 - x_delta
+    x_delta = int( (feet * 1.6) + 0.5 )
+    plane_rect.centery = 745 - x_delta
 
     # Limit sliding space of the plane to the upper and lower barrier
     if plane_rect.centery > 660:
