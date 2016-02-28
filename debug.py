@@ -20,7 +20,7 @@ class Debug(pygame.sprite.Sprite):
     output.append("Set Angle:  " + str(self.plane.set_angle))
     output.append("Thrust:     " + str(self.plane.thrust))
     output.append("Set Thrust: " + str(self.plane.set_thrust))
-    output.append("Y-Center:   " + str(self.plane.plane_rect.centery))
+    output.append("Y-Center:   " + str(self.plane.get_y_coords()))
     for line in output:
         speed_display = self.font_object.render(line, 1,(255,255,255))
         self.screen.blit(speed_display, (20, 20 + y_offset))

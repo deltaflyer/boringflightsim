@@ -57,6 +57,9 @@ class Plane(pygame.sprite.Sprite):
   def set_speed(self, knots):
     self.knots = knots
 
+  def get_y_coords(self):
+    return self.plane_rect.centery
+
   def push_down(self):
     if self.set_angle > -90 and self.feet > 0:
       self.set_angle= self.set_angle - 5

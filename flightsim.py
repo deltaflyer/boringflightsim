@@ -22,8 +22,9 @@ debug = ''
 def main():
 	global screen, plane, scenery, speedindicator, heightindicator, thrustindicator, debug
 	screen = init_display()
-	scenery = Scenery(screen, 0, 0)
+	scenery = Scenery(screen)
 	plane = Plane(screen, scenery)
+	scenery.register_plane(plane)
 	speedindicator = Speedindicator(screen)
 	heightindicator = Heightindicator(screen)
 	thrustindicator = Thrustindicator(screen)
@@ -50,7 +51,7 @@ def run_game():
 
 		# Draw the scenery
 		screen.fill([0, 0, 0])
-		scenery.update(0,0)
+		scenery.update()
 
 		# Draw the speed indicator
 		speedindicator.update(plane.get_speed())
