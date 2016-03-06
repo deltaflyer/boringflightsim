@@ -16,20 +16,24 @@ class Cloudgenerator():
 
 	def update(self):
 		self.clouds = self.__add_cloud(self.clouds)
-		self.clouds = self.__add_clouds(self.clouds)
+		self.clouds = self.__update_clouds(self.clouds)
 		self.clouds = self.__remove_invisible_clouds(self.clouds)
+
+	def get_number_of_clouds(self):
+		return len(self.clouds)
 
 	def __add_cloud(self, cloud_array):
 		# Above the threshold there are no clouds
-		if self.plane.get_feet() > self.cloud_cover_threshold:
-			return cloud_array
+		#if self.plane.get_feet() < self.cloud_cover_threshold:
+		#	return cloud_array
 		
 		# add a cloud every 1000. frame
-		if 0 == random.randint(0,1000):
-			y = random.randint(200, 900)
-			cloud = Cloud(self.screen, 2000, y)
+		if 0 == random.randint(0,50):
+			y = random.randint(100, 550)
+			cloud = self.Cloud(self.screen, 2000, y)
 			cloud.register_plane(self.plane)
 			cloud_array.append(cloud)
+		return cloud_array
 
 	def __update_clouds(self, cloud_array):
 		for cloud in cloud_array:
@@ -38,8 +42,8 @@ class Cloudgenerator():
 
 	def __remove_invisible_clouds(self, cloud_array):
 		# Above the threshold there are no clouds
-		if self.plane.get_feet() > self.cloud_cover_threshol:
-			return cloud_array
+		#if self.plane.get_feet() > self.cloud_cover_threshold:
+		#return cloud_array
 
 		# Remove clouds which are not visible anymore
 		new_clouds = []
@@ -53,7 +57,7 @@ class Cloudgenerator():
 
 	class Cloud(pygame.sprite.Sprite):
 		def __init__(self, screen, start_x, start_y):
-			file_name = str(random.randint(1,3)) + '.png'
+			file_name = 'cloud%s.png' % str(random.randint(1,3))
 			self.cloud_img = pygame.image.load(os.path.join('graphics', file_name))
 			self.cloud_rect = self.cloud_img.get_rect()
 			self.cloud_rect.centerx = start_x
@@ -66,7 +70,10 @@ class Cloudgenerator():
 			self.plane = plane
 
 		def update(self,):
-			self.cloud_img.cloud_rect_x = self.cloud_img.cloud_rect_x - 5
+			self.cloud_rect.centerx = self.cloud_rect.centerx - 5
 			self.screen.blit(self.cloud_img, self.cloud_rect)
+
+		def get_x(self):
+			return self.cloud_rect.centerx
 
 	

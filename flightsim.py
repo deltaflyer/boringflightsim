@@ -19,11 +19,13 @@ class Flightsim():
 		self.scenery = Scenery(self.screen)
 		self.plane = Plane(self.screen, self.scenery)
 		self.scenery.register_plane(self.plane)
+		self.cloudgenerator = Cloudgenerator(self.screen)
+		self.cloudgenerator.register_plane(self.plane)
 		self.speedindicator = Speedindicator(self.screen)
 		self.heightindicator = Heightindicator(self.screen)
 		self.thrustindicator = Thrustindicator(self.screen)
 
-		self.debug = Debug(self.screen, self.plane)
+		self.debug = Debug(self.screen, self.plane, self.cloudgenerator)
 
 	def __init_display(self):
 		pygame.init()
@@ -43,8 +45,9 @@ class Flightsim():
 				self.fps = 30
 
 			# Draw the self.scenery
-			self.screen.fill([0, 0, 0])
 			self.scenery.update()
+
+			self.cloudgenerator.update()
 
 			# Draw the speed indicator
 			self.speedindicator.update(self.plane.get_speed())
