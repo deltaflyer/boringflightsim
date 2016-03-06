@@ -66,11 +66,24 @@ class Cloudgenerator():
 			self.screen = screen
 			self.plane = ''
 
+			self.plane_current_feet = 0
+			self.plane_old_feet = 0
+
 		def register_plane(self, plane):
 			self.plane = plane
 
-		def update(self,):
-			self.cloud_rect.centerx = self.cloud_rect.centerx - 5
+		def update(self):
+			# Caclulate X correction factor for plane speed
+			x_movement = int( (self.plane.get_speed() / 40) + 0.5 )
+
+			# Calculate Y correction factor for plane climb / sink
+			self.plane_old_feet = self.plane_current_feet
+			self.plane_current_feet = self.plane.get_feet()
+			y_movement = int( ( (self.plane_old_feet - self.plane_current_feet)    ) + 0.5)
+			
+
+			self.cloud_rect.centerx = self.cloud_rect.centerx - x_movement
+			self.cloud_rect.centery = self.cloud_rect.centery - y_movement
 			self.screen.blit(self.cloud_img, self.cloud_rect)
 
 		def get_x(self):
