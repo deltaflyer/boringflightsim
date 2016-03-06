@@ -1,102 +1,96 @@
-import singleton
 import pygame
 import sys
 import os
 from plane import Plane
 from scenery import Scenery
+from cloudgenerator import Cloudgenerator
 from speedindicator import Speedindicator
 from heightindicator import Heightindicator
 from thrustindicator import Thrustindicator
 from debug import Debug
 
-screen = ''
-clock = pygame.time.Clock()
-fps = 30
-plane = ''
-scenery = ''
-speedindicator = ''
-heightindicator = ''
-thrustindicator = ''
-debug = ''
+class Flightsim():
 
-def main():
-	global screen, plane, scenery, speedindicator, heightindicator, thrustindicator, debug
-	screen = init_display()
-	scenery = Scenery(screen)
-	plane = Plane(screen, scenery)
-	scenery.register_plane(plane)
-	speedindicator = Speedindicator(screen)
-	heightindicator = Heightindicator(screen)
-	thrustindicator = Thrustindicator(screen)
-	debug = Debug(screen, plane)
-	run_game()
+	def __init__(self):
+		self.fps = 30
+		self.clock = pygame.time.Clock()
+		self.screen = self.__init_display()
 
-def init_display():
-	pygame.init()
-	screen = pygame.display.set_mode((1280, 745))
-	screen.fill([0, 0, 0])
-	icon = pygame.image.load(os.path.join('graphics', 'icon.png'))
-	icon = pygame.transform.scale(icon, (32, 32))
-	pygame.display.set_icon(icon)
-	pygame.display.set_caption('Boring Flightsim')
-	return screen
+		self.scenery = Scenery(self.screen)
+		self.plane = Plane(self.screen, self.scenery)
+		self.scenery.register_plane(self.plane)
+		self.speedindicator = Speedindicator(self.screen)
+		self.heightindicator = Heightindicator(self.screen)
+		self.thrustindicator = Thrustindicator(self.screen)
 
-def run_game():
-	global screen, plane, clock, fps, speedindicator, heightindicator, thrustindicator, debug
-	while True:
-		clock.tick(30)
-		fps = clock.get_fps()
-		if fps < 1:
-			fps = 30
+		self.debug = Debug(self.screen, self.plane)
 
-		# Draw the scenery
-		screen.fill([0, 0, 0])
-		scenery.update()
+	def __init_display(self):
+		pygame.init()
+		self.screen = pygame.display.set_mode((1280, 745))
+		self.screen.fill([0, 0, 0])
+		icon = pygame.image.load(os.path.join('graphics', 'icon.png'))
+		icon = pygame.transform.scale(icon, (32, 32))
+		pygame.display.set_icon(icon)
+		pygame.display.set_caption('Boring Flightsim')
+		return self.screen
 
-		# Draw the speed indicator
-		speedindicator.update(plane.get_speed())
+	def run_game(self):
+		while True:
+			self.clock.tick(30)
+			self.fps = self.clock.get_fps()
+			if self.fps < 1:
+				self.fps = 30
 
-		# Draw the height indicator
-		heightindicator.update(plane.get_feet())
+			# Draw the self.scenery
+			self.screen.fill([0, 0, 0])
+			self.scenery.update()
 
-		# Draw the thrust indicator
-		thrustindicator.update(plane.get_thrust())
+			# Draw the speed indicator
+			self.speedindicator.update(self.plane.get_speed())
 
-		# Draw debug infos
-		debug.update()
+			# Draw the height indicator
+			self.heightindicator.update(self.plane.get_feet())
 
-		# Draw the plane
-		plane.update()
-		pygame.display.flip()
+			# Draw the thrust indicator
+			self.thrustindicator.update(self.plane.get_thrust())
 
-		# Handle events
-		handle_events(pygame.event.get())
+			# Draw self.debug infos
+			self.debug.update()
+
+			# Draw the self.plane
+			self.plane.update()
+			pygame.display.flip()
+
+			# Handle events
+			self.__handle_events(pygame.event.get())
 
 
-def handle_events(events):
-	for event in events:
-		if event.type == pygame.QUIT:
-			sys.exit()
-		elif event.type == pygame.KEYDOWN:
-			if event.key == pygame.K_w:
-				# more thrust
-				plane.increase_speed()
-			if event.key == pygame.K_s:
-				# less thrust
-				plane.decrease_speed()
-			if event.key == pygame.K_UP:
-				# pull up
-				plane.pull_up()
-			if event.key == pygame.K_DOWN:
-				# pull up
-				plane.push_down()
+	def __handle_events(self, events):
+		for event in events:
+			if event.type == pygame.QUIT:
+				sys.exit()
+			elif event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_w:
+					# more thrust
+					self.plane.increase_speed()
+				if event.key == pygame.K_s:
+					# less thrust
+					self.plane.decrease_speed()
+				if event.key == pygame.K_UP:
+					# pull up
+					self.plane.pull_up()
+				if event.key == pygame.K_DOWN:
+					# pull up
+					self.plane.push_down()
 
-			# Debug code
-			if event.key == pygame.K_t:
-				# pull up
-				plane.set_speed(200)
+				# self.debug code
+				if event.key == pygame.K_t:
+					# pull up
+					self.plane.set_speed(200)
 
 
 
 if __name__ == "__main__":
-	main()
+	flightsim = Flightsim()
+	flightsim.run_game()
