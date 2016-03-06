@@ -79,11 +79,18 @@ class Cloudgenerator():
 			# Calculate Y correction factor for plane climb / sink
 			self.plane_old_feet = self.plane_current_feet
 			self.plane_current_feet = self.plane.get_feet()
-			y_movement = int( ( (self.plane_old_feet - self.plane_current_feet)    ) + 0.5)
+			if self.plane.get_y_coords() == 280:
+				if self.plane_current_feet > self.plane_old_feet:
+					y_movement = 1
+				if self.plane_current_feet < self.plane_old_feet:
+					y_movement = -1
+				if self.plane_current_feet == self.plane_old_feet:
+					y_movement = 0
+			else:
+				y_movement = 0
 			
-
 			self.cloud_rect.centerx = self.cloud_rect.centerx - x_movement
-			self.cloud_rect.centery = self.cloud_rect.centery - y_movement
+			self.cloud_rect.centery = self.cloud_rect.centery + y_movement
 			self.screen.blit(self.cloud_img, self.cloud_rect)
 
 		def get_x(self):
