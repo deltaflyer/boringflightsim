@@ -48,7 +48,7 @@ class Cloudgenerator():
 		# Remove clouds which are not visible anymore
 		new_clouds = []
 		for cloud in cloud_array:
-			if cloud.get_x() < 0:
+			if cloud.get_x() < -200:
 				continue
 			else:
 				new_clouds.append(cloud)

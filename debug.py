@@ -25,6 +25,6 @@ class Debug(pygame.sprite.Sprite):
     output.append("#Clouds:    " + str(self.cloudgenerator.get_number_of_clouds()))
 
     for line in output:
-        speed_display = self.font_object.render(line, 1,(255,255,255))
+        speed_display = self.font_object.render(line, 1,(0,0,0))
         self.screen.blit(speed_display, (20, 20 + y_offset))
         y_offset += 14

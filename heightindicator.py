@@ -20,7 +20,8 @@ class Heightindicator(pygame.sprite.Sprite):
     relative_offset_x = 122
     relative_offset_y = 8
 
-    speed_display = self.font_object.render("Height: " + str(current_height), 1,(255,255,255))
+    speed_display = self.font_object.render("Height: " + str(current_height), 1, (36,255,0))
+    pygame.draw.rect(self.screen, (0, 0, 0), (self.position_x - 5 , self.position_y , 155 , 30), 0)
     self.screen.blit(speed_display, (self.position_x, self.position_y))
     
     # no value changes return

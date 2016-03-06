@@ -12,5 +12,7 @@ class Thrustindicator(pygame.sprite.Sprite):
     self.font_object = pygame.font.Font(font_path, font_size)
 
   def update(self, current_thrust):
-    speed_display = self.font_object.render("Thrust: " + str(current_thrust) + " %", 1,(255,255,255))
+    speed_display = self.font_object.render("Thrust: " + str(current_thrust) + " %", 1, (36,255,0))
+
+    pygame.draw.rect(self.screen, (0, 0, 0), (695 ,10 , 125 , 30), 0)
     self.screen.blit(speed_display, (700, 10))
