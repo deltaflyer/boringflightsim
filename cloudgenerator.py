@@ -45,15 +45,7 @@ class Cloudgenerator():
 		#if self.plane.get_feet() > self.cloud_cover_threshold:
 		#return cloud_array
 
-		# Remove clouds which are not visible anymore
-		new_clouds = []
-		for cloud in cloud_array:
-			if cloud.get_x() < -200:
-				continue
-			else:
-				new_clouds.append(cloud)
-		return new_clouds
-
+		return [x for x in cloud_array if x.get_x() >= -200]
 
 	class Cloud(pygame.sprite.Sprite):
 		def __init__(self, screen, start_x, start_y):
@@ -74,7 +66,7 @@ class Cloudgenerator():
 
 		def update(self):
 			# Caclulate X correction factor for plane speed
-			x_movement = int( (self.plane.get_speed() / 40) + 0.5 )
+			x_movement = self.plane.get_speed() // 40
 
 			# Calculate Y correction factor for plane climb / sink
 			self.plane_old_feet = self.plane_current_feet
