@@ -6,7 +6,7 @@ To honour all pilots out there who spend hours and hours everyday in their plane
 
 The simulator is not very accurate and only a pet project for programming breaks while writing my PhD thesis. It tries to simulate the 2D behavoiur of an [Airbus A 320-200](https://en.wikipedia.org/wiki/Airbus_A320_family#A320).
 
-![Screenshot](https://raw.githubusercontent.com/deltaflyer/boringflightsim/master/graphics/)
+![Screenshot](https://raw.githubusercontent.com/deltaflyer/boringflightsim/master/graphics/screenshot.png)
 
 ## Getting Started
 
@@ -19,13 +19,13 @@ cd boringflightsim
 ./run.sh
 ```
 ## Flight Controls
-![W]([http://dabuttonfactory.com/button.png?t=W&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Increase thrust**
+![W](http://dabuttonfactory.com/button.png?t=W&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Increase thrust**
 
-![S]([http://dabuttonfactory.com/button.png?t=S&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Decrease thrust**
+![S](http://dabuttonfactory.com/button.png?t=S&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Decrease thrust**
 
-![Pull nose up]([http://dabuttonfactory.com/button.png?t=Arrow-Down&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Pull nose up**
+![Pull nose up](http://dabuttonfactory.com/button.png?t=Arrow-Down&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Pull nose up**
 
-![Push nose down]([http://dabuttonfactory.com/button.png?t=Arrow-Up&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Push nose down**
+![Push nose down](http://dabuttonfactory.com/button.png?t=Arrow-Up&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Push nose down**
 
 ## Flying Advises
 
