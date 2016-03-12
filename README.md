@@ -35,10 +35,10 @@ cd boringflightsim
 
 ## Bugs and Featues
 
-If you find a bug please fix it and provide a pull request. The same is fine for new features. Any contribution is welcome
+If you find a bug, please fix it and provide a pull request. The same is fine for new features. Any contribution is welcome.
 
-## Licence - the MIT License (MIT)
-Copyright (c) Oliver Wannenwetsch for the [Python User Group](http://www.goepy.de) Göttingen 2016
+## The MIT License (MIT)
+Copyright (c) Oliver Wannenwetsch for the [Python User Group](http://www.goepy.de) Göttingen 2016. The software is licensed under the MIT Licence. 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
