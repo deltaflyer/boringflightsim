@@ -9,13 +9,15 @@ class Plane(pygame.sprite.Sprite):
 
     pygame.sprite.Sprite.__init__(self)
 
-    self.plane_img = pygame.image.load(os.path.join('graphics', 'plane_small.png'))
+    self.plane_img = pygame.image.load(os.path.join('graphics', 'plane_small_gear.png'))
     self.plane_rect = self.plane_img.get_rect()
     self.plane_rect.centerx = 400
     self.plane_rect.centery = 660
 
     self.screen = screen
     self.scenery = scenery
+
+    self.gear_down = True
 
     self.angle = 0
     self.angle_old = 0
@@ -109,7 +111,6 @@ class Plane(pygame.sprite.Sprite):
       self.thrust = self.thrust - 1
 
   def __update_angles(self):
-
     if int(self.angle) is not int(self.set_angle):
       self.angle_old = self.angle
       # Pull nose up
@@ -132,6 +133,25 @@ class Plane(pygame.sprite.Sprite):
     if angle < 0:
       return value * -1
     return value
+
+  def toggle_landing_gear(self):
+	# Below 50 feet the landing gear cannot be retracted
+	if self.feet < 50:
+		return
+	# Toggle the gear state
+	plane_temp_x = self.plane_rect.centerx
+	plane_temp_y = self.plane_rect.centery
+	if self.gear_down:
+		self.plane_img = pygame.image.load(os.path.join('graphics', 'plane_small.png'))
+		self.gear_down = False
+	else:
+		self.plane_img = pygame.image.load(os.path.join('graphics', 'plane_small_gear.png'))
+		self.gear_down = True
+	# Calculate the new images
+	self.plane_rect = self.plane_img.get_rect()
+	self.plane_rect.centerx = plane_temp_x
+	self.plane_rect.centery = plane_temp_y
+	self.images_computes = self.__precompute_rotated_plane(self.plane_img, self.plane_rect)
 
   def __compute_single_plane(self, feet, angle):
     smoothed_angle = int(angle + 0.5)
@@ -156,6 +176,10 @@ class Plane(pygame.sprite.Sprite):
     thrust_coeff = 0.002
     air_drag = 0.05
     temp_val = 0
+
+    # If the gear is down the air drag increases
+    if self.gear_down and self.feet > 50:
+		air_drag = 0.05 * 3.5
 
     # in case of climb decrease acceleration based on angle
     if int(angle + 0.5) > 0:

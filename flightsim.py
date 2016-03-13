@@ -86,6 +86,9 @@ class Flightsim():
 				if event.key == pygame.K_DOWN:
 					# pull up
 					self.plane.push_down()
+				if event.key == pygame.K_g:
+					# Toggle gear
+					self.plane.toggle_landing_gear()
 
 				# self.debug code
 				if event.key == pygame.K_t:
