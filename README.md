@@ -23,11 +23,12 @@ cd boringflightsim
 
 ![S](http://dabuttonfactory.com/button.png?t=S&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Decrease thrust**
 
+![Toggle the landing gear](http://dabuttonfactory.com/button.png?t=G&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Toggle the landing gear**
+
 ![Pull nose up](http://dabuttonfactory.com/button.png?t=Arrow-Down&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Pull nose up**
 
 ![Push nose down](http://dabuttonfactory.com/button.png?t=Arrow-Up&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Push nose down**
 
-![Toggle the landing gear](http://dabuttonfactory.com/button.png?t=g&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Toggle the landing gear**
 
 ## Flying Advises
 
