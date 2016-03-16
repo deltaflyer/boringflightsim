@@ -94,6 +94,9 @@ class Flightsim():
                 if event.key == pygame.K_g:
                     # Toggle gear
                     self.plane.toggle_landing_gear()
+                if event.key == pygame.K_a:
+                    # Toggle Airbreak
+                    self.plane.toggle_airbrake()
 
                 # self.debug code
                 if event.key == pygame.K_t:

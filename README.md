@@ -25,6 +25,8 @@ cd boringflightsim
 
 ![Toggle the landing gear](http://dabuttonfactory.com/button.png?t=G&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Toggle the landing gear**
 
+![Toggle the airbreak ](http://dabuttonfactory.com/button.png?t=A&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Toggle the airbreak**
+
 ![Pull nose up](http://dabuttonfactory.com/button.png?t=Arrow-Down&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Pull nose up**
 
 ![Push nose down](http://dabuttonfactory.com/button.png?t=Arrow-Up&f=Calibri-Bold&ts=24&tc=fff&tshs=1&tshc=000&hp=20&vp=8&c=5&bgt=gradient&bgc=3d85c6&ebgc=073763) **Push nose down**
@@ -33,8 +35,9 @@ cd boringflightsim
 ## Flying Advises
 
 * Accelerate to 100 knots, in order to pull the nose of plane up and start flying
-* If your speed is below 100 knots, you cannot tilt the plane anymore as air is not fast enough to produce the necesarry forces
-* Try to land between 50-150 feet/minute
+* If your speed is below 100 knots, you cannot tilt the plane anymore as air is not fast enough to produce the necessary forces
+* For slowing down toggle the air break by pressing *A* The multifunction display shows the state of the airbreak.
+* Try to land between 50-150 feet/minute vertical speed and 140 kts horizontal speed
 
 ## Bugs and Featues
 

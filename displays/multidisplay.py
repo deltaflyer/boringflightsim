@@ -19,13 +19,16 @@ class Multidisplay(pygame.sprite.Sprite):
         output = []
 
         if self.plane.gear_down:
-            output.append('[INFO]    GEAR DOWN')
+            output.append('[INFO]     GEAR DOWN - LOCK OK')
+
+        if self.plane.air_brake_out:
+            output.append('[INFO]     AIR BREAK - OUT  OK')
 
         if len(output) is 0:
             output = ["Multi Display in standby"]
 
+        pygame.draw.rect(self.screen, (0, 0, 0), (self.x - 3, self.y, 250, (len(output) + 1) * 11), 0)
         for line in output:
             speed_display = self.font_object.render(line, 1, (36, 255, 0))
-            pygame.draw.rect(self.screen, (0, 0, 0), (self.x - 3, self.y, 250, 20), 0)
             self.screen.blit(speed_display, (self.x, self.y + y_offset + 3))
             y_offset += 14
