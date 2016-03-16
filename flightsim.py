@@ -7,6 +7,7 @@ from debug import Debug
 from displays.heightindicator import Heightindicator
 from displays.thrustindicator import Thrustindicator
 from displays.speedindicator import Speedindicator
+from displays.multidisplay import Multidisplay
 from plane import Plane
 from scenery import Scenery
 
@@ -25,6 +26,7 @@ class Flightsim():
         self.speedindicator = Speedindicator(self.screen)
         self.heightindicator = Heightindicator(self.screen)
         self.thrustindicator = Thrustindicator(self.screen)
+        self.multidisplay = Multidisplay(self.screen, self.plane)
 
         self.debug = Debug(self.screen, self.plane, self.cloudgenerator)
 
@@ -58,6 +60,9 @@ class Flightsim():
 
             # Draw the thrust indicator
             self.thrustindicator.update(self.plane.get_thrust())
+
+            # Draw the flight multidisplay
+            self.multidisplay.update()
 
             # Draw self.debug infos
             self.debug.update()
