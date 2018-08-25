@@ -16,37 +16,37 @@ class Scenery(pygame.sprite.Sprite):
     def update(self, ):
         self.__print_background()
         self.__print_sky()
-        self.__print_grass()
+        self.__print_waters()
 
     def get_terrain_heigh_in_pixel(self):
         return 64
 
-    def __print_grass(self):
-        # if the plane is too high, then print no gras
+    def __print_waters(self):
+        # if the plane is too high, then print no water
         if self.plane.get_y_coords() < 400:
             return
         x = 0
         correction_y = 0
-        gras = self.__get_gras()
+        water = self.__get_water()
 
         # Calculate the correction factor for y based on plane height
         if (self.plane.get_y_coords()) < 450:
             correction_y = self.plane.get_y_coords() - 450
 
-        # Print gras
-        gras[1].centery = 730 - correction_y
+        # Print water
+        water[1].centery = 730 - correction_y
         for i in range(1, 25):
-            gras[1].centerx = x
-            self.screen.blit(gras[0], gras[1])
+            water[1].centerx = x
+            self.screen.blit(water[0], water[1])
             x = x + 64
 
-    def __get_gras(self):
-        gras_img = pygame.image.load(os.path.join('graphics', 'gras.png')).convert()
-        gras_rect = gras_img.get_rect()
-        return (gras_img, gras_rect)
+    def __get_water(self):
+        water_img = pygame.image.load(os.path.join('graphics', 'water.png')).convert()
+        water_rect = water_img.get_rect()
+        return (water_img, water_rect)
 
     def __print_sky(self):
-        # if the plane is too high, then print no gras
+        # if the plane is too high, then print no water
         if self.plane.get_y_coords() < 350:
             return
         x = 0
@@ -57,7 +57,7 @@ class Scenery(pygame.sprite.Sprite):
         if (self.plane.get_y_coords()) < 450:
             correction_y = self.plane.get_y_coords() - 450
 
-        # Print gras
+        # Print water
         sky[1].centery = 650 - correction_y
         for i in range(1, 16):
             sky[1].centerx = x

@@ -5,16 +5,72 @@
                 "description": "asphalt of the depart airport",
                 "x": 0,
                 "y": 725,
-                "repeat": 2000,
+                "repeat": 50,
                 "texture": "asphalt1.png",
                 "crashable": false
             },
             {
                 "description": "building at the departing beginning",
                 "x": 200,
-                "y": 617,
+                "y": 613,
                 "repeat": 3,
                 "texture": "james8.png",
+                "crashable": false
+            },
+            {
+                "description": "building at the end of the runway",
+                "x": 2800,
+                "y": 625,
+                "repeat": 2,
+                "texture": "james6.png",
+                "crashable": true
+            },
+            {
+                "description": "speedway limit sign",
+                "x": 600,
+                "y": 670,
+                "repeat": 1,
+                "texture": "road_sign1.png",
+                "crashable": false
+            },
+            {
+                "description": "run way start roadsign",
+                "x": 1000,
+                "y": 670,
+                "repeat": 1,
+                "texture": "road_sign3.png",
+                "crashable": false
+            },
+            {
+                "description": "start line at the starting of the runway",
+                "x": 1000,
+                "y": 725,
+                "repeat": 1,
+                "texture": "asphalt9.png",
+                "crashable": false
+            },
+            {
+                "description": "runway building backgrounds",
+                "x": 1200,
+                "y": 620,
+                "repeat": 6,
+                "texture": "buildings-layer.png",
+                "crashable": false
+            },
+            {
+                "description": "runway",
+                "x": 1040,
+                "y": 725,
+                "repeat": 16,
+                "texture": "asphalt2.png",
+                "crashable": false
+            },
+            {
+                "description": "end of runway markings",
+                "x": 2064,
+                "y": 725,
+                "repeat": 10,
+                "texture": "asphalt10.png",
                 "crashable": false
             }
         ]

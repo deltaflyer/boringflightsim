@@ -10,3 +10,5 @@ The textures used in Boring FlightSim are subject of following sources
 - micronaut*.png - http://micronaut.ca/?p=546
 - james*.png - http://www.skyscrapercity.com/showthread.php?t=222367
 - asphalt*.png - https://opengameart.org/content/faux-asphalt-texture-pack
+- water.png - https://opengameart.org/content/texture-water
+- road_sign*.png - https://opengameart.org/content/road-signs
