@@ -10,6 +10,7 @@ from displays.speedindicator import Speedindicator
 from displays.multidisplay import Multidisplay
 from plane import Plane
 from scenery import Scenery
+from groundobjects import GroundObjects
 
 
 class Flightsim():
@@ -19,8 +20,10 @@ class Flightsim():
         self.screen = self.__init_display()
 
         self.scenery = Scenery(self.screen)
+        self.groundobjects = GroundObjects(self.screen)
         self.plane = Plane(self.screen, self.scenery)
         self.scenery.register_plane(self.plane)
+        self.groundobjects.register_plane(self.plane)
         self.cloudgenerator = Cloudgenerator(self.screen)
         self.cloudgenerator.register_plane(self.plane)
         self.speedindicator = Speedindicator(self.screen)
@@ -50,6 +53,10 @@ class Flightsim():
             # Draw the self.scenery
             self.scenery.update()
 
+            # Draw the groundobjects
+            self.groundobjects.update()
+
+            # Update the cloud-generator
             self.cloudgenerator.update()
 
             # Draw the speed indicator

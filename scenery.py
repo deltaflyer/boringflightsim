@@ -49,7 +49,6 @@ class Scenery(pygame.sprite.Sprite):
         # if the plane is too high, then print no gras
         if self.plane.get_y_coords() < 350:
             return
-
         x = 0
         correction_y = 0
         sky = self.__get_sky()

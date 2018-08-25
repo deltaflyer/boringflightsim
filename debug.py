@@ -25,6 +25,7 @@ class Debug(pygame.sprite.Sprite):
         output.append("Y-Center:   " + str(self.plane.get_y_coords()))
         output.append("#Clouds:    " + str(self.cloudgenerator.get_number_of_clouds()))
         output.append("Gead Down?  " + str(self.plane.gear_down))
+        output.append("X-Distance: " + str(self.plane.get_travelled_x_distance()))
 
         for line in output:
             speed_display = self.font_object.render(line, 1, (0, 0, 0))

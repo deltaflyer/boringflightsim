@@ -1,0 +1,21 @@
+{
+    "objects":
+        [
+            {
+                "description": "asphalt of the depart airport",
+                "x": 0,
+                "y": 725,
+                "repeat": 2000,
+                "texture": "asphalt1.png",
+                "crashable": false
+            },
+            {
+                "description": "building at the departing beginning",
+                "x": 200,
+                "y": 617,
+                "repeat": 3,
+                "texture": "james8.png",
+                "crashable": false
+            }
+        ]
+}

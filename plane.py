@@ -13,6 +13,8 @@ class Plane(pygame.sprite.Sprite):
         self.plane_rect = self.plane_img.get_rect()
         self.plane_rect.centerx = 400
         self.plane_rect.centery = 660
+        # Distance travelled in x-direction
+        self.travelled_x_distance = 0
 
         self.screen = screen
         self.scenery = scenery
@@ -77,6 +79,9 @@ class Plane(pygame.sprite.Sprite):
     def get_thrust(self):
         return self.thrust
 
+    def get_travelled_x_distance(self):
+        return self.travelled_x_distance
+
     def update(self):
         # Bring real angle to set_angle
         self.__update_angles()
@@ -86,6 +91,9 @@ class Plane(pygame.sprite.Sprite):
 
         # Compute the speed
         self.__update_knots()
+
+        # Update travelled x direction
+        self.__update_x_travelled_instance()
 
         # Compute the height
         if self.feet >= 0:
@@ -174,7 +182,31 @@ class Plane(pygame.sprite.Sprite):
 
     def __update_knots(self):
         # Bring real knots to set_knots
-        self.knots = self.knots + self.__calculate_acceleration(self.angle, self.thrust);
+        self.knots = self.knots + self.__calculate_acceleration(self.angle, self.thrust)
+
+    def __update_x_travelled_instance(self):
+        if self.knots <= 0:
+            return
+        if self.knots > 40:
+            self.travelled_x_distance += int(round(self.knots // 40))
+            return
+        if self.knots > 30:
+            self.travelled_x_distance += int(round(self.knots // 30))
+            return
+        if self.knots > 20:
+            self.travelled_x_distance += int(round(self.knots // 20))
+            return
+        if self.knots > 10:
+            self.travelled_x_distance += int(round(self.knots // 10))
+            return
+        if self.knots > 5:
+            self.travelled_x_distance += int(round(self.knots // 5))
+            return
+        if self.knots > 2:
+            self.travelled_x_distance += int(round(self.knots // 2))
+            return
+        self.travelled_x_distance += int(round(self.knots))
+
 
     def __calculate_acceleration(self, angle, thrust):
         thrust_coeff = 0.002
