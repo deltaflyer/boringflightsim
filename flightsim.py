@@ -11,19 +11,23 @@ from displays.multidisplay import Multidisplay
 from plane import Plane
 from scenery import Scenery
 from groundobjects import GroundObjects
+from collision_detection import CollisionDetection
 
 
 class Flightsim():
     def __init__(self):
+        self.is_game_running = True
         self.fps = 30
         self.clock = pygame.time.Clock()
         self.screen = self.__init_display()
-
         self.scenery = Scenery(self.screen)
         self.groundobjects = GroundObjects(self.screen)
         self.plane = Plane(self.screen, self.scenery)
         self.scenery.register_plane(self.plane)
         self.groundobjects.register_plane(self.plane)
+        self.collision_detection = CollisionDetection(self.screen, self)
+        self.collision_detection.register_plane(self.plane)
+        self.collision_detection.register_groundobjects(self.groundobjects.get_groundobjects())
         self.cloudgenerator = Cloudgenerator(self.screen)
         self.cloudgenerator.register_plane(self.plane)
         self.speedindicator = Speedindicator(self.screen)
@@ -76,16 +80,24 @@ class Flightsim():
 
             # Draw the self.plane
             self.plane.update()
+
+            # Check is a collision occured
+            self.collision_detection.update()
+
+            # Do the final draw operation
             pygame.display.flip()
 
             # Handle events
             self.__handle_events(pygame.event.get())
 
+    def stop_simulation(self):
+        self.is_game_running = False
+
     def __handle_events(self, events):
         for event in events:
             if event.type == pygame.QUIT:
                 sys.exit()
-            elif event.type == pygame.KEYDOWN:
+            elif (event.type == pygame.KEYDOWN) and self.is_game_running:
                 if event.key == pygame.K_w:
                     # more thrust
                     self.plane.increase_speed()

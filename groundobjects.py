@@ -39,11 +39,15 @@ class GroundObjects():
         for groundobject in self.groundobjects:
             groundobject.update()
 
+    def get_groundobjects(self):
+        return self.groundobjects
+
     class GroundObject(pygame.sprite.Sprite):
         def __init__(self, screen, x, y, repeat, crashable, texture):
             # Initialize members
             self.screen = screen
             self.plane = ''
+            self.crashable = crashable
             self.last_travelled_x_distrance = 0
             dir_path = os.path.dirname(os.path.realpath(__file__))
             texture_path = os.path.join(dir_path, 'graphics', texture)
@@ -68,6 +72,12 @@ class GroundObjects():
         def register_plane(self, plane):
             self.plane = plane
             self.last_travelled_x_distrance = plane.get_travelled_x_distance()
+
+        def is_crashable(self):
+            return self.crashable
+
+        def get_image_maps(self):
+            return self.image_maps
 
         def update(self):
             # Compute the new x-offsets

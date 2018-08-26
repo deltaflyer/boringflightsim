@@ -82,6 +82,9 @@ class Plane(pygame.sprite.Sprite):
     def get_travelled_x_distance(self):
         return self.travelled_x_distance
 
+    def get_rect(self):
+        return self.plane_rect
+
     def update(self):
         # Bring real angle to set_angle
         self.__update_angles()
