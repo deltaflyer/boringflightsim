@@ -56,6 +56,9 @@ class Plane(pygame.sprite.Sprite):
         if self.set_thrust > 0:
             self.set_thrust = self.set_thrust - 10
 
+    def get_angle(self):
+        return self.angle
+
     def get_speed(self):
         return self.knots
 
