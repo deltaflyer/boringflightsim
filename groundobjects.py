@@ -64,6 +64,7 @@ class GroundObjects():
                 image_map["rect"].centerx = x + (width * current_repetition)
                 # ground objects are on the ground, in line
                 image_map["rect"].centery = y
+                image_map["original_centery"] = y
                 # append the newly computed rect
                 self.image_maps.append(image_map)
             # Init the sprite
@@ -94,7 +95,9 @@ class GroundObjects():
                     # update x-coordinates if the plane has moved
                     if x_offset > 0:
                         self.image_maps[i]["rect"].centerx -= x_offset
+                    # Correction for ground level
                     if (self.plane.get_y_coords()) < 450:
-                        self.image_maps[i]["rect"].centery = 725 - y_offset
+                        # Restore previous y value
+                        self.image_maps[i]["rect"].centery =  self.image_maps[i]["original_centery"] - y_offset
             # Update plane distance:
             self.last_travelled_x_distrance = self.plane.get_travelled_x_distance()
