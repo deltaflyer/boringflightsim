@@ -69,11 +69,11 @@ class Plane(pygame.sprite.Sprite):
         return self.plane_rect.centery
 
     def push_down(self):
-        if self.set_angle > -90 and self.feet > 0:
+        if self.set_angle > -20 and self.feet > 0:
             self.set_angle = self.set_angle - 5
 
     def pull_up(self):
-        if self.set_angle < 90 and self.knots > self.TAKEOFFSPEED:
+        if self.set_angle < 20 and self.knots > self.TAKEOFFSPEED:
             self.set_angle = self.set_angle + 5
 
     def get_feet(self):

@@ -83,9 +83,21 @@ class CollisionDetection(pygame.sprite.Sprite):
                     self.reason = "Crashed into ground. Gear was retracted."
             self.old_feet_value = self.plane.get_feet()
 
+    def __detect_overspeed_crash(self):
+        if self.plane.get_speed() > 570:
+            self.is_crashed = True
+            self.reason = "Plane structure collapsed. Speed > 570 kn."
+
+    def __detect_underspeed_stall(self):
+        if self.plane.get_feet() > 5 and self.plane.get_speed() < 100:
+            self.is_crashed = True
+            self.reason = "Plane stalled. Speed < 100 kn."
+
     def update(self):
         if self.is_crashed:
             self.__handle_collision()
         else:
             self.__detect_groundobject_crash()
             self.__detect_ground_crash()
+            self.__detect_overspeed_crash()
+            self.__detect_underspeed_stall()
