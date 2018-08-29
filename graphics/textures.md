@@ -12,3 +12,5 @@ The textures used in Boring FlightSim are subject of following sources
 - asphalt*.png - https://opengameart.org/content/faux-asphalt-texture-pack
 - water.png - https://opengameart.org/content/texture-water
 - road_sign*.png - https://opengameart.org/content/road-signs
+- palm*.png - https://opengameart.org/content/palms
+- stop.png - https://opengameart.org/content/stop-sign-32x32

@@ -12,21 +12,24 @@ class GroundObjects():
         self.groundobjects = []
         # Load declarations
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        ground_object_path = os.path.join(dir_path, 'ground_objects', 'declaration.json')
-        with open(ground_object_path, "r") as fp:
-            declarations = json.load(fp)["objects"]
-        # Create Ground objects
-        for declaration in declarations:
-            self.groundobjects.append(
-                self.GroundObject(
-                    screen,
-                    declaration["x"],
-                    declaration["y"],
-                    declaration["repeat"],
-                    declaration["crashable"],
-                    declaration["texture"]
+        for filename in ["departure_airport.json", "arrival_airport.json"]:
+            ground_object_path = os.path.join(dir_path, 'ground_objects', filename)
+            with open(ground_object_path, "r") as fp:
+                objectmap = json.load(fp)
+                objects = objectmap["objects"]
+                x_offset = objectmap["x-offset"]
+            # Create Ground objects
+            for declaration in objects:
+                self.groundobjects.append(
+                    self.GroundObject(
+                        screen,
+                        declaration["x"] + x_offset,
+                        declaration["y"],
+                        declaration["repeat"],
+                        declaration["crashable"],
+                        declaration["texture"]
+                    )
                 )
-            )
         
 
     def register_plane(self, plane):
@@ -87,7 +90,7 @@ class GroundObjects():
             y_offset = self.plane.get_y_coords() - 450
             for i in range(0, len(self.image_maps)):
                 # if the image is not on the screen anymore skip processing
-                if ((self.image_maps[i]["rect"].centerx < -300) or (self.image_maps[i]["rect"].centerx > 8000)):
+                if (self.image_maps[i]["rect"].centerx < -300):
                     continue
                 else:
                     # Blit the ground texture

@@ -1,0 +1,94 @@
+{
+    "x-offset": 7000,
+    "objects":
+        [
+            {
+                "description": "AA - gras as the airport field",
+                "x": 0,
+                "y": 725,
+                "repeat": 70,
+                "texture": "gras.png",
+                "crashable": false
+            },
+            {
+                "description": "AA - block A - palms at the beginning",
+                "x": 200,
+                "y": 670,
+                "repeat": 3,
+                "texture": "palm1.png",
+                "crashable": true
+            },
+            {
+                "description": "AA - block B - palms at the beginning",
+                "x": 345,
+                "y": 670,
+                "repeat": 4,
+                "texture": "palm2.png",
+                "crashable": true
+            },
+            {
+                "description": "AA - block C - palms at the beginning",
+                "x": 550,
+                "y": 670,
+                "repeat": 7,
+                "texture": "palm1.png",
+                "crashable": true
+            },
+            {
+                "description": "AA - runway",
+                "x": 1040,
+                "y": 725,
+                "repeat": 45,
+                "texture": "asphalt2.png",
+                "crashable": false
+            },
+            {
+                "description": "AA - runway building backgrounds",
+                "x": 1200,
+                "y": 620,
+                "repeat": 14,
+                "texture": "buildings-layer.png",
+                "crashable": false
+            },
+            {
+                "description": "AA - beginning of runway markings",
+                "x": 1000,
+                "y": 725,
+                "repeat": 10,
+                "texture": "asphalt10.png",
+                "crashable": false
+            },
+            {
+                "description": "AA - line at the ending of the runway",
+                "x": 2500,
+                "y": 725,
+                "repeat": 1,
+                "texture": "asphalt9.png",
+                "crashable": false
+            },
+            {
+                "description": "AA - speedway limit sign",
+                "x": 2500,
+                "y": 670,
+                "repeat": 1,
+                "texture": "road_sign1.png",
+                "crashable": false
+            },
+            {
+                "description": "AA - stop sign",
+                "x": 2900,
+                "y": 675,
+                "repeat": 3,
+                "texture": "stop.png",
+                "crashable": false
+            },
+            {
+                "description": "AA - building at the end of the runway",
+                "x": 3000,
+                "y": 615,
+                "repeat": 2,
+                "texture": "james9.png",
+                "crashable": true
+            }
+        ]
+}

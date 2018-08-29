@@ -6,6 +6,7 @@ class CollisionDetection(pygame.sprite.Sprite):
         # Constants
         self.MAX_ALLOWED_SINKRATE = 7
         self.PLANE_GROUND_TOUCHDOWN = 660
+        self.ARRIVAL_AIRPORT_MAX_DISTANCE = 10500
         #  Variables
         self.screen = screen
         pygame.sprite.Sprite.__init__(self)
@@ -92,6 +93,11 @@ class CollisionDetection(pygame.sprite.Sprite):
         if self.plane.get_feet() > 5 and self.plane.get_speed() < 100:
             self.is_crashed = True
             self.reason = "Plane stalled. Speed < 100 kn."
+
+    def __detect_airport_miss(self):
+        if self.plane.get_travelled_x_distance() > self.ARRIVAL_AIRPORT_MAX_DISTANCE:
+            self.is_crashed = True
+            self.reason = "You missed the arrival airport."
 
     def update(self):
         if self.is_crashed:

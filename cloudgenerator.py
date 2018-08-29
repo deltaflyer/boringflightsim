@@ -28,7 +28,7 @@ class Cloudgenerator():
         #	return cloud_array
 
         # add a cloud every 1000. frame
-        if 0 == random.randint(0, 50):
+        if 0 == random.randint(0, 50) and self.plane.get_feet() > 20:
             y = random.randint(100, 550)
             cloud = self.Cloud(self.screen, 2000, y)
             cloud.register_plane(self.plane)
