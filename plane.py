@@ -37,6 +37,8 @@ class Plane(pygame.sprite.Sprite):
         self.feet = 0
 
         self.images_computes = self.__precompute_rotated_plane(self.plane_img, self.plane_rect)
+        self.explosion_images = self.__load_explosion_images()
+        self.explosion_counter = 0
 
     def __precompute_rotated_plane(self, image, rect):
         images_computes = {}
@@ -48,6 +50,19 @@ class Plane(pygame.sprite.Sprite):
         rot_image = pygame.transform.rotate(image, angle)
         rot_rect = rot_image.get_rect(center=rect.center)
         return (rot_image, rot_rect)
+
+    def __load_explosion_images(self):
+        retval = []
+        for i in range(1, 25):
+            image = pygame.image.load(
+                        os.path.join(
+                        'graphics',
+                        "explosion_{}.png".format(i)
+                        )
+                    )
+            rect = image.get_rect()
+            retval.append((image, rect))
+        return retval
 
     def increase_speed(self):
         if self.set_thrust < 100 and self.engine_running:
@@ -117,11 +132,26 @@ class Plane(pygame.sprite.Sprite):
             self.plane_img = result[0]
             self.plane_rect = result[1]
 
+        # Render the plane
+        self.screen.blit(self.plane_img, self.plane_rect)
+
         # Shutdown thrust if engines are shutdown
         if not self.engine_running and self.thrust > 0:
             self.decrease_speed()
 
-        self.screen.blit(self.plane_img, self.plane_rect)
+        # Render the explosion frame by frame if the engines are out
+        if not self.engine_running and self.explosion_counter < 24:
+            explosion_rect = self.explosion_images[self.explosion_counter][1]
+            # center the explosion rect on the plane engines position
+            explosion_rect.centerx = self.plane_rect.centerx + 20
+            explosion_rect.centery = self.plane_rect.centery + 20
+            self.screen.blit(
+                self.explosion_images[self.explosion_counter][0],
+                explosion_rect
+                )
+            # Slow down the explosion effect
+            if self.travelled_x_distance % 4 == 0:
+                self.explosion_counter += 1
 
     def __update_thrust(self):
         # Incrementally change the thrust

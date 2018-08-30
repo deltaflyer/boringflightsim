@@ -14,3 +14,4 @@ The textures used in Boring FlightSim are subject of following sources
 - road_sign*.png - https://opengameart.org/content/road-signs
 - palm*.png - https://opengameart.org/content/palms
 - stop.png - https://opengameart.org/content/stop-sign-32x32
+- explosion*.png - https://opengameart.org/content/animated-fireball
