@@ -32,7 +32,7 @@
                 "y": 670,
                 "repeat": 7,
                 "texture": "palm1.png",
-                "crashable": true
+                "crashable": false
             },
             {
                 "description": "AA - runway",
