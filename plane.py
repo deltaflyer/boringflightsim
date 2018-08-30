@@ -21,6 +21,7 @@ class Plane(pygame.sprite.Sprite):
 
         self.gear_down = True
         self.air_brake_out = False
+        self.engine_running = True
 
         self.angle = 0
         self.angle_old = 0
@@ -49,12 +50,15 @@ class Plane(pygame.sprite.Sprite):
         return (rot_image, rot_rect)
 
     def increase_speed(self):
-        if self.set_thrust < 100:
+        if self.set_thrust < 100 and self.engine_running:
             self.set_thrust = self.set_thrust + 10
 
     def decrease_speed(self):
         if self.set_thrust > 0:
             self.set_thrust = self.set_thrust - 10
+
+    def turn_engines_off(self):
+        self.engine_running = False
 
     def get_angle(self):
         return self.angle
@@ -112,6 +116,10 @@ class Plane(pygame.sprite.Sprite):
             result = self.__compute_single_plane(self.feet, self.angle)
             self.plane_img = result[0]
             self.plane_rect = result[1]
+
+        # Shutdown thrust if engines are shutdown
+        if not self.engine_running and self.thrust > 0:
+            self.decrease_speed()
 
         self.screen.blit(self.plane_img, self.plane_rect)
 

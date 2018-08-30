@@ -37,10 +37,14 @@ class Multidisplay(pygame.sprite.Sprite):
         if self.plane.get_speed() < 120 and self.plane.get_feet() > 5:
             output.append(('RED',   '[WARN] UNDERSPEED - ACC NOW  '))
 
+        if not self.plane.engine_running:
+            output.append(('RED',   '[ALERT] ENGINE 1 FAILURE!  '))
+            output.append(('RED',   '[ALERT] ENGINE 2 FAILURE!  '))
+
         if len(output) is 0:
             output = [('AMBER', "Multi Display in standby")]
 
-        pygame.draw.rect(self.screen, (0, 0, 0), (self.x - 3, self.y, 250, (len(output) + 1) * 11), 0)
+        pygame.draw.rect(self.screen, (0, 0, 0), (self.x - 3, self.y, 250, (len(output) + 1) * 15), 0)
         for line in output:
             color = (255, 194, 0)
             if line[0] == "GREEN":

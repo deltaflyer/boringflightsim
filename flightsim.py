@@ -72,7 +72,7 @@ class Flightsim():
             self.heightindicator.update(self.plane.get_feet())
 
             # Draw the thrust indicator
-            self.thrustindicator.update(self.plane.get_thrust())
+            self.thrustindicator.update(self.plane.get_thrust(), self.plane.engine_running)
 
             # Draw the flight multidisplay
             self.multidisplay.update()
@@ -88,6 +88,10 @@ class Flightsim():
 
             # Check is a collision occured
             self.collision_detection.update()
+
+            # Check if we fire an event:
+            if self.plane.engine_running and self.plane.travelled_x_distance > 3000:
+                self.plane.turn_engines_off()
 
             # Do the final draw operation
             pygame.display.flip()
